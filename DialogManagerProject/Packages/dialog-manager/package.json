@@ -1,0 +1,15 @@
+{
+  "name": "com.kefir.dialog-manager",
+  "version": "1.0.0",
+  "displayName": "Dialog Manager",
+  "description": "This is an dialog manager package",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "keywords": [],
+  "author": {
+    "name": "Vladimir Sazonov",
+    "email": "v.sazonov@kefirgames.com",
+    "url": "https://www.unity3d.com"
+  },
+  "type": "tool"
+}
