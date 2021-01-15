@@ -37,7 +37,10 @@ namespace Dialogs
 
         public void CloseLastDialog()
         {
-            _dialogs.Pop().Close();
+            if (_dialogs.Count > 0)
+            {
+                _dialogs.Pop().Close();
+            }
         }
     }
 }
