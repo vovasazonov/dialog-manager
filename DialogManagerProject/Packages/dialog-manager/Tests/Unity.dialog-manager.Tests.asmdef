@@ -3,7 +3,7 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Unity.music-manager"
+        "Unity.dialog-manager"
     ],
     "includePlatforms": [
         "Editor"
