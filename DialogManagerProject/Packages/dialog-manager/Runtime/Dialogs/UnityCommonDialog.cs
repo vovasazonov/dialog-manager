@@ -40,10 +40,18 @@ namespace Dialogs
             _unityDialog.Close();
         }
 
-        public void SetAction(ButtonDialogType buttonType, Action action)
+        private void SetAction(ButtonDialogType buttonType, Action action)
         {
             _dialogButtonActions.Add(buttonType, action);
             AddButtonListener(_dialogButtons[buttonType], action);
+        }
+
+        public void SetActions(IDictionary<ButtonDialogType, Action> actions)
+        {
+            foreach (var buttonDialogType in actions.Keys)
+            {
+                SetAction(buttonDialogType, actions[buttonDialogType]);
+            }
         }
 
         public void SetMessage(string message)
