@@ -48,6 +48,8 @@ namespace Dialogs
 
         public void SetActions(IDictionary<ButtonDialogType, Action> actions)
         {
+            ResetActions();
+            
             foreach (var buttonDialogType in actions.Keys)
             {
                 SetAction(buttonDialogType, actions[buttonDialogType]);
