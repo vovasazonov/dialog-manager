@@ -8,6 +8,9 @@ namespace Dialogs
     [RequireComponent(typeof(UnityDialog))]
     public sealed class UnityCommonDialog : MonoBehaviour, ICommonDialog
     {
+        public event OpenedHandler Opened;
+        public event ClosedHandler Closed;
+        
         [SerializeField] private List<DialogButton> _buttons;
         [SerializeField] private Text _titleText;
         [SerializeField] private Text _messageText;
@@ -18,8 +21,21 @@ namespace Dialogs
         private void Awake()
         {
             _unityDialog = GetComponent<UnityDialog>();
-
+            AddUnityDialogListeners();
+            
             InstantiateButtons();
+        }
+
+        private void AddUnityDialogListeners()
+        {
+            _unityDialog.Opened += OnOpened;
+            _unityDialog.Closed += OnClosed;
+        }
+        
+        private void RemoveUnityDialogListeners()
+        {
+            _unityDialog.Opened -= OnOpened;
+            _unityDialog.Closed -= OnClosed;
         }
 
         private void InstantiateButtons()
@@ -29,7 +45,7 @@ namespace Dialogs
                 _dialogButtons[dialogButton.ButtonDialogType] = new UnityButton(dialogButton.Button);
             }
         }
-        
+
         public void Open()
         {
             _unityDialog.Open();
@@ -98,6 +114,26 @@ namespace Dialogs
         {
             public ButtonDialogType ButtonDialogType;
             public Button Button;
+        }
+
+        private void OnClosed(IDialog dialog)
+        {
+            CallOpened(dialog);
+        }
+
+        private void OnOpened(IDialog dialog)
+        {
+            CallClosed(dialog);
+        }
+        
+        private void CallOpened(IDialog dialog)
+        {
+            Opened?.Invoke(dialog);
+        }
+
+        private void CallClosed(IDialog dialog)
+        {
+            Closed?.Invoke(dialog);
         }
     }
 }

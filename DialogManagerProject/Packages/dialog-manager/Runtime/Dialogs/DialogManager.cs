@@ -7,7 +7,7 @@ namespace Dialogs
     {
         private readonly IDictionary<string, IDialog> _customDialogs;
         private readonly IDictionary<CommonDialogType, ICommonDialog> _commonDialogs;
-        private readonly Stack<IDialog> _dialogs = new Stack<IDialog>();
+        private readonly List<IDialogController> _activeDialogs = new List<IDialogController>();
 
         public DialogManager(IDictionary<string, IDialog> customDialogs, IDictionary<CommonDialogType, ICommonDialog> commonDialogs)
         {
@@ -19,8 +19,17 @@ namespace Dialogs
         {
             var dialog = _customDialogs[id];
             dialog.Open();
-            
-            _dialogs.Push(dialog);
+
+            InstantiateActiveDialog(dialog, false);
+        }
+
+        public ICloserBlockDialog OpenBlockDialog(string id)
+        {
+            var dialog = _customDialogs[id];
+            var closerDialog = new CloserBlockDialog(dialog);
+            OpenDialog(id);
+
+            return closerDialog;
         }
 
         public void OpenCommonDialog(string title, string message, CommonDialogType commonDialogType, IDictionary<ButtonDialogType, Action> actions)
@@ -32,15 +41,43 @@ namespace Dialogs
             dialog.SetActions(actions);
             dialog.Open();
             
-            _dialogs.Push(dialog);
+            InstantiateActiveDialog(dialog, false);
         }
 
         public void CloseLastDialog()
         {
-            if (_dialogs.Count > 0)
+            if (_activeDialogs.Count > 0)
             {
-                _dialogs.Pop().Close();
+                var lastDialog = _activeDialogs[_activeDialogs.Count - 1];
+                
+                if (!lastDialog.IsBlock)
+                {
+                    lastDialog.Close();
+                }
             }
+        }
+        
+        private void InstantiateActiveDialog(IDialog dialog, bool isBlock)
+        {
+            var dialogController = new DialogController(dialog, isBlock);
+            _activeDialogs.Add(dialogController);
+            AddDialogControllerListener(dialogController);
+        }
+
+        private void AddDialogControllerListener(IDialogController dialogController)
+        {
+            dialogController.DialogClosed += OnDialogClosed;
+        }
+
+        private void RemoveDialogControllerListener(IDialogController dialogController)
+        {
+            dialogController.DialogClosed -= OnDialogClosed;
+        }
+
+        private void OnDialogClosed(IDialogController dialogController)
+        {
+            RemoveDialogControllerListener(dialogController);
+            _activeDialogs.Remove(dialogController);
         }
     }
 }

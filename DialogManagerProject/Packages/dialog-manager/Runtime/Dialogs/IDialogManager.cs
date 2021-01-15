@@ -6,6 +6,7 @@ namespace Dialogs
     public interface IDialogManager
     {
         void OpenDialog(string id);
+        ICloserBlockDialog OpenBlockDialog(string id);
         void OpenCommonDialog(string title, string message, CommonDialogType commonDialogType, IDictionary<ButtonDialogType, Action> actions);
         void CloseLastDialog();
     }
