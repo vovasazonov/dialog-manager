@@ -1,14 +1,16 @@
 ﻿namespace Dialogs
 {
-    public delegate void ShownHandler(IDialog dialog);
-    public delegate void HiddenHandler(IDialog dialog);
+    public delegate void OpenedHandler(IDialog dialog);
+    public delegate void ClosedHandler(IDialog dialog);
 
     public interface IDialog
     {
-        event ShownHandler Shown;
-        event HiddenHandler Hidden;
+        event OpenedHandler Opened;
+        event ClosedHandler Closed;
+
+        bool IsAllowCloseByBack { get; set; }
         
-        void Show();
-        void Hide();
+        void Open();
+        void Close();
     }
 }

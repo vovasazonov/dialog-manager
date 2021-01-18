@@ -8,15 +8,20 @@
         {
             _dialog = dialog;
         }
-        
-        public void Show()
+
+        public bool IsAllowCloseByBack
         {
-            _dialog.Show();
+            set => _dialog.IsAllowCloseByBack = value;
         }
 
-        public void Hide()
+        public void Open()
         {
-            _dialog.Hide();
+            _dialog.Open();
+        }
+
+        public void Close()
+        {
+            _dialog.Close();
         }
     }
 }

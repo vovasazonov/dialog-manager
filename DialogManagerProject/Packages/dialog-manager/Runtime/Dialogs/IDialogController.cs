@@ -2,7 +2,9 @@
 {
     public interface IDialogController
     {
-        void Show();
-        void Hide();
+        bool IsAllowCloseByBack { set; }
+        
+        void Open();
+        void Close();
     }
 }

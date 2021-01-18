@@ -3,5 +3,6 @@
     public interface IDialogManager
     {
         IDialogController GetDialog(string id);
+        void CloseLastDialogByBack();
     }
 }

@@ -4,29 +4,31 @@ namespace Dialogs
 {
     public class UnityDialog : MonoBehaviour, IDialog
     {
-        public event ShownHandler Shown;
-        public event HiddenHandler Hidden;
-        
-        public void Show()
+        public event OpenedHandler Opened;
+        public event ClosedHandler Closed;
+
+        public bool IsAllowCloseByBack { get; set; }
+
+        public void Open()
         {
             gameObject.SetActive(true);
-            CallShown(this);
+            CallOpened(this);
         }
 
-        public void Hide()
+        public void Close()
         {
             gameObject.SetActive(false);
-            CallHidden(this);
+            CallClosed(this);
         }
 
-        private void CallShown(IDialog dialog)
+        private void CallOpened(IDialog dialog)
         {
-            Shown?.Invoke(dialog);
+            Opened?.Invoke(dialog);
         }
 
-        private void CallHidden(IDialog dialog)
+        private void CallClosed(IDialog dialog)
         {
-            Hidden?.Invoke(dialog);
+            Closed?.Invoke(dialog);
         }
     }
 }

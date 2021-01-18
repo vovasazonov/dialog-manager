@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Dialogs;
 using UnityEngine;
 
@@ -11,8 +12,19 @@ public sealed class GameManager : MonoBehaviour
     {
         var dialogDic = new Dictionary<string, IDialog> {{"okCancel", OkCancelDialog}};
         _dialogManager = new DialogManager(dialogDic);
-        
-        var dialog = _dialogManager.GetDialog("okCancel");
-        dialog.Show();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            _dialogManager.CloseLastDialogByBack();
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            var dialog = _dialogManager.GetDialog("okCancel");
+            dialog.IsAllowCloseByBack = true;
+            dialog.Open();
+        }
     }
 }
