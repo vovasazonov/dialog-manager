@@ -9,6 +9,7 @@
         event ClosedHandler Closed;
 
         bool IsAllowCloseByBack { get; set; }
+        bool IsAllowCloseByOverlay { get; set; }
         
         void Open();
         void Close();

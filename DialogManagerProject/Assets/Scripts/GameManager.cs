@@ -23,7 +23,8 @@ public sealed class GameManager : MonoBehaviour
         else if (Input.GetKey(KeyCode.S))
         {
             var dialog = _dialogManager.GetDialog("okCancel");
-            dialog.IsAllowCloseByBack = true;
+            dialog.IsCloseByClickBack = true;
+            dialog.IsCloseByClickOverlay = true;
             dialog.Open();
         }
     }

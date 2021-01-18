@@ -2,7 +2,8 @@
 {
     public interface IDialogController
     {
-        bool IsAllowCloseByBack { set; }
+        bool IsCloseByClickBack { set; }
+        bool IsCloseByClickOverlay { set; }
         
         void Open();
         void Close();
