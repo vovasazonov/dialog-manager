@@ -16,7 +16,7 @@ namespace Dialogs
 
         public string Id => _id;
         
-        public void SetLabel(string text)
+        public void SetText(string text)
         {
             _text.text = text;
         }

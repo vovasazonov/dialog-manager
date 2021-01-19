@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace Dialogs
 {
-    internal sealed class DialogButtonsController : IDialogButtonsController
+    internal sealed class ButtonsController : IButtonsController
     {
-        private readonly IDictionary<string, IDialogButton> _buttons = new Dictionary<string, IDialogButton>();
+        private readonly IDictionary<string, IButton> _buttons = new Dictionary<string, IButton>();
         private readonly IDictionary<string, Action> _buttonCallbacks = new Dictionary<string, Action>();
         
-        public DialogButtonsController(IEnumerable<IDialogButton> dialogButtons)
+        public ButtonsController(IEnumerable<IButton> buttons)
         {
-            InstantiateButtons(dialogButtons);
+            InitializeButtons(buttons);
         }
         
-        private void InstantiateButtons(IEnumerable<IDialogButton> dialogButtons)
+        private void InitializeButtons(IEnumerable<IButton> buttons)
         {
-            foreach (var dialogButton in dialogButtons)
+            foreach (var dialogButton in buttons)
             {
                 _buttons[dialogButton.Id] = dialogButton;
             }
@@ -47,21 +47,21 @@ namespace Dialogs
             _buttonCallbacks.Clear();
         }
 
-        private void AddButtonListener(IDialogButton dialogButton, Action callback)
+        private void AddButtonListener(IButton button, Action callback)
         {
-            dialogButton.Click += callback.Invoke;
+            button.Click += callback.Invoke;
         }
         
-        private void RemoveButtonListener(IDialogButton dialogButton, Action callback)
+        private void RemoveButtonListener(IButton button, Action callback)
         {
-            dialogButton.Click -= callback.Invoke;
+            button.Click -= callback.Invoke;
         }
         
-        public void SetButtonsLabels(IDictionary<string, string> labels)
+        public void SetButtonsTexts(IDictionary<string, string> texts)
         {
             foreach (var id in _buttons.Keys)
             {
-                _buttons[id].SetLabel(labels[id]);
+                _buttons[id].SetText(texts[id]);
             }
         }
     }

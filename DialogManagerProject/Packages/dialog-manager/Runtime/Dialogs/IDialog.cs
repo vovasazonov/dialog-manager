@@ -15,8 +15,8 @@ namespace Dialogs
         bool IsAllowCloseByBack { get; set; }
         bool IsAllowCloseByOverlay { get; set; }
         void SetButtonsCallbacks(IDictionary<string, Action> callbacks);
-        void SetButtonsLabels(IDictionary<string, string> labels);
-        void SetLabelsTexts(IDictionary<string, string> labels);
+        void SetButtonsTexts(IDictionary<string, string> labels);
+        void SetDialogTexts(IDictionary<string, string> labels);
         void Open();
         void Close();
     }

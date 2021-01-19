@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Dialogs
 {
-    public class ClickablePanel : MonoBehaviour, IClickable, IPointerClickHandler
+    public sealed class ClickablePanel : MonoBehaviour, IClickable, IPointerClickHandler
     {
         public event ClickHandler Click;
         

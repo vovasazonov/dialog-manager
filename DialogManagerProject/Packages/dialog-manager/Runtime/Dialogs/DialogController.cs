@@ -23,9 +23,9 @@ namespace Dialogs
             _dialog.SetButtonsCallbacks(callbacks);
         }
 
-        public void SetButtonsLabels(IDictionary<string, string> labels)
+        public void SetButtonsTexts(IDictionary<string, string> texts)
         {
-            _dialog.SetButtonsLabels(labels);
+            _dialog.SetButtonsTexts(texts);
         }
 
         public void Open()

@@ -2,7 +2,7 @@
 {
     public delegate void ClickHandler();
 
-    public interface IClickable
+    internal interface IClickable
     {
         event ClickHandler Click;
     }

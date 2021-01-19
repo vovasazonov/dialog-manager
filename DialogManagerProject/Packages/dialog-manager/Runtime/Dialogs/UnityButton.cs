@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace Dialogs
 {
     [RequireComponent(typeof(Button))]
-    public sealed class UnityDialogButton : MonoBehaviour, IDialogButton
+    public sealed class UnityButton : MonoBehaviour, IButton
     {
         public event ClickHandler Click;
 
@@ -30,7 +30,7 @@ namespace Dialogs
             _button.onClick.RemoveListener(OnClick);
         }
 
-        public void SetLabel(string text)
+        public void SetText(string text)
         {
             _text.text = text;
         }

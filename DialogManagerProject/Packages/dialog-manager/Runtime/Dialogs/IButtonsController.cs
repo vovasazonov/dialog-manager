@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Dialogs
 {
-    internal interface IDialogButtonsController
+    internal interface IButtonsController
     {
         void SetButtonsCallbacks(IDictionary<string, Action> callbacks);
-        void SetButtonsLabels(IDictionary<string, string> labels);
+        void SetButtonsTexts(IDictionary<string, string> texts);
     }
 }

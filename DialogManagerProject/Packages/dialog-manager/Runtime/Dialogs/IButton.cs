@@ -1,6 +1,6 @@
 ﻿namespace Dialogs
 {
-    public interface IDialogText
+    internal interface IButton : IClickable
     {
         string Id { get; }
         void SetText(string text);

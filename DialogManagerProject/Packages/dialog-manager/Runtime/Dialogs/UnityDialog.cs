@@ -12,13 +12,13 @@ namespace Dialogs
 
         [SerializeField] private string _id;
         [SerializeField] private ClickablePanel _overlay;
-        [SerializeField] private List<UnityDialogButton> _buttons;
+        [SerializeField] private List<UnityButton> _buttons;
         [SerializeField] private List<UnityDialogText> _labelTexts;
         
         private RectTransform _rectTransform;
         private bool _isAllowCloseByOverlay;
-        private IDialogButtonsController _dialogButtonsController;
-        private IDialogLabelsTextsController _dialogLabelsTextsController;
+        private IButtonsController _buttonsController;
+        private IDialogTextsController _dialogTextsController;
 
         public string Id => _id;
         public bool IsAllowCloseByBack { get; set; }
@@ -47,8 +47,8 @@ namespace Dialogs
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
-            _dialogButtonsController = new DialogButtonsController(_buttons);
-            _dialogLabelsTextsController = new DialogLabelsTextsController(_labelTexts);
+            _buttonsController = new ButtonsController(_buttons);
+            _dialogTextsController = new DialogTextsController(_labelTexts);
         }
 
         private void AddOverlayListener()
@@ -68,17 +68,17 @@ namespace Dialogs
 
         public void SetButtonsCallbacks(IDictionary<string, Action> callbacks)
         {
-            _dialogButtonsController.SetButtonsCallbacks(callbacks);
+            _buttonsController.SetButtonsCallbacks(callbacks);
         }
 
-        public void SetButtonsLabels(IDictionary<string, string> labels)
+        public void SetButtonsTexts(IDictionary<string, string> labels)
         {
-            _dialogButtonsController.SetButtonsLabels(labels);
+            _buttonsController.SetButtonsTexts(labels);
         }
 
-        public void SetLabelsTexts(IDictionary<string, string> labels)
+        public void SetDialogTexts(IDictionary<string, string> labels)
         {
-            _dialogLabelsTextsController.SetLabelsTexts(labels);
+            _dialogTextsController.SetDialogTexts(labels);
         }
 
         public void Open()
