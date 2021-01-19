@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Dialogs
 {
@@ -36,6 +35,8 @@ namespace Dialogs
                 }
             }
         }
+
+        public DialogPriorityType DialogPriorityType { get; set; }
 
         private void Awake()
         {

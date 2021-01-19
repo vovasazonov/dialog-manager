@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Dialogs.Descriptions;
 
 namespace Dialogs
 {
@@ -8,14 +9,27 @@ namespace Dialogs
         private readonly List<IDialog> _openDialogs = new List<IDialog>();
         private readonly IDialogControllerManager _dialogControllerManager;
 
-        public DialogManager(IDictionary<string, IDialog> dialogs)
+        public DialogManager(IDictionary<string, IDialog> dialogs, IDialogDatabase dialogDatabase)
         {
             _dialogs = dialogs;
             _dialogControllerManager = new DialogControllerManager(dialogs);
+
+            InitializeDialogs(dialogs, dialogDatabase);
             
             foreach (var dialog in _dialogs.Values)
             {
                 AddDialogListener(dialog);
+            }
+        }
+
+        private static void InitializeDialogs(IDictionary<string, IDialog> dialogs, IDialogDatabase dialogDatabase)
+        {
+            foreach (var dialogDescription in dialogDatabase.DialogDescriptionDic.Values)
+            {
+                var dialog = dialogs[dialogDescription.Id];
+                dialog.IsAllowCloseByBack = dialogDescription.IsAllowCloseByBack;
+                dialog.IsAllowCloseByOverlay = dialogDescription.IsAllowCloseByOverlay;
+                dialog.DialogPriorityType = dialogDescription.DialogPriorityType;
             }
         }
 

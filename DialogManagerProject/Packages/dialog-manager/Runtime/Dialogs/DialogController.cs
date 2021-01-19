@@ -15,16 +15,6 @@
             _dialog = dialog;
         }
 
-        public bool IsCloseByClickBack
-        {
-            set => _dialog.IsAllowCloseByBack = value;
-        }
-
-        public bool IsCloseByClickOverlay
-        {
-            set => _dialog.IsAllowCloseByOverlay = value;
-        }
-
         public void Open()
         {
             CallRequestOpen(_dialog);
