@@ -29,15 +29,15 @@ namespace Dialogs
 
         public void SetButtonsCallbacks(IDictionary<string, Action> callbacks)
         {
-            ResetActions();
+            ResetButtonsCallbacks();
             
             foreach (var id in callbacks.Keys)
             {
                 SetButtonCallback(id, callbacks[id]);
             }
         }
-        
-        private void ResetActions()
+
+        private void ResetButtonsCallbacks()
         {
             foreach (var id in _buttonCallbacks.Keys)
             {
@@ -55,6 +55,14 @@ namespace Dialogs
         private void RemoveButtonListener(IDialogButton dialogButton, Action callback)
         {
             dialogButton.Click -= callback.Invoke;
+        }
+        
+        public void SetButtonsLabels(IDictionary<string, string> labels)
+        {
+            foreach (var id in _buttons.Keys)
+            {
+                _buttons[id].SetLabel(labels[id]);
+            }
         }
     }
 }

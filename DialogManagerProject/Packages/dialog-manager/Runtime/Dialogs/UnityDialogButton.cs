@@ -9,10 +9,11 @@ namespace Dialogs
         public event ClickHandler Click;
 
         [SerializeField] private string _id;
+        [SerializeField] private Text _text;
         private Button _button;
 
         public string Id => _id;
-
+        
         private void Awake()
         {
             _button = GetComponent<Button>();
@@ -29,6 +30,11 @@ namespace Dialogs
             _button.onClick.RemoveListener(OnClick);
         }
 
+        public void SetLabel(string text)
+        {
+            _text.text = text;
+        }
+        
         private void OnClick()
         {
             CallClick();
