@@ -8,11 +8,9 @@ namespace Dialogs.Descriptions
         [SerializeField] private string _id;
         [SerializeField] private bool _isAllowCloseByBack;
         [SerializeField] private bool _isAllowCloseByOverlay;
-        [SerializeField] private DialogPriorityType _dialogPriorityType;
 
         public string Id => _id;
         public bool IsAllowCloseByBack => _isAllowCloseByBack;
         public bool IsAllowCloseByOverlay => _isAllowCloseByOverlay;
-        public DialogPriorityType DialogPriorityType => _dialogPriorityType;
     }
 }

@@ -5,6 +5,5 @@
         string Id { get; }
         bool IsAllowCloseByBack { get; }
         bool IsAllowCloseByOverlay { get; }
-        DialogPriorityType DialogPriorityType { get; }
     }
 }

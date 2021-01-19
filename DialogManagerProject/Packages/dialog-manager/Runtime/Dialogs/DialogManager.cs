@@ -8,12 +8,12 @@ namespace Dialogs
     {
         private readonly IDictionary<string, IDialog> _dialogs;
         private readonly List<IDialog> _openDialogs = new List<IDialog>();
-        private readonly IDialogControllerManager _dialogControllerManager;
+        private readonly IDialogControllers _dialogControllers;
 
         public DialogManager(IEnumerable<IDialog> dialogs, IDialogDatabase dialogDatabase)
         {
             _dialogs = dialogs.ToDictionary(k => k.Id, v => v);
-            _dialogControllerManager = new DialogControllerManager(_dialogs);
+            _dialogControllers = new DialogControllers(_dialogs);
 
             InitializeDialogs(_dialogs, dialogDatabase);
             AddDialogListeners();
@@ -26,7 +26,6 @@ namespace Dialogs
                 var dialog = dialogs[dialogDescription.Id];
                 dialog.IsAllowCloseByBack = dialogDescription.IsAllowCloseByBack;
                 dialog.IsAllowCloseByOverlay = dialogDescription.IsAllowCloseByOverlay;
-                dialog.DialogPriorityType = dialogDescription.DialogPriorityType;
             }
         }
         
@@ -70,7 +69,7 @@ namespace Dialogs
 
         public IDialogController GetDialog(string id)
         {
-            return _dialogControllerManager.GetDialog(id);
+            return _dialogControllers.GetDialog(id);
         }
 
         public void CloseLastDialogByBack()

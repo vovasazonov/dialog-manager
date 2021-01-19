@@ -11,7 +11,6 @@
         string Id { get; }
         bool IsAllowCloseByBack { get; set; }
         bool IsAllowCloseByOverlay { get; set; }
-        DialogPriorityType DialogPriorityType { get; set; }
         
         void Open();
         void Close();

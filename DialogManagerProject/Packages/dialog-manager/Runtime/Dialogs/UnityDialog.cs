@@ -38,8 +38,6 @@ namespace Dialogs
             }
         }
 
-        public DialogPriorityType DialogPriorityType { get; set; }
-
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
