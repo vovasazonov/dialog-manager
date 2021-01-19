@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Dialogs
 {
+    [RequireComponent(typeof(RectTransform))]
     public sealed class UnityDialog : MonoBehaviour, IDialog
     {
-        [SerializeField] private ClickablePanel _overlay;
-
         public event OpenedHandler Opened;
         public event ClosedHandler Closed;
+        
+        [SerializeField] private ClickablePanel _overlay;
 
+        private RectTransform _rectTransform;
         private bool _isAllowCloseByOverlay;
         
         public bool IsAllowCloseByBack { get; set; }
@@ -34,6 +37,11 @@ namespace Dialogs
             }
         }
 
+        private void Awake()
+        {
+            _rectTransform = GetComponent<RectTransform>();
+        }
+
         private void AddOverlayListener()
         {
             _overlay.Click += OnOverlayClick;
@@ -52,6 +60,7 @@ namespace Dialogs
         public void Open()
         {
             gameObject.SetActive(true);
+            _rectTransform.SetAsLastSibling();
             CallOpened(this);
         }
 
