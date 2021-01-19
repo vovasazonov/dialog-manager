@@ -13,10 +13,12 @@ namespace Dialogs
         [SerializeField] private string _id;
         [SerializeField] private ClickablePanel _overlay;
         [SerializeField] private List<UnityDialogButton> _buttons;
+        [SerializeField] private List<UnityDialogText> _labelTexts;
         
         private RectTransform _rectTransform;
         private bool _isAllowCloseByOverlay;
         private IDialogButtonsController _dialogButtonsController;
+        private IDialogLabelsTextsController _dialogLabelsTextsController;
 
         public string Id => _id;
         public bool IsAllowCloseByBack { get; set; }
@@ -46,6 +48,7 @@ namespace Dialogs
         {
             _rectTransform = GetComponent<RectTransform>();
             _dialogButtonsController = new DialogButtonsController(_buttons);
+            _dialogLabelsTextsController = new DialogLabelsTextsController(_labelTexts);
         }
 
         private void AddOverlayListener()
@@ -71,6 +74,11 @@ namespace Dialogs
         public void SetButtonsLabels(IDictionary<string, string> labels)
         {
             _dialogButtonsController.SetButtonsLabels(labels);
+        }
+
+        public void SetLabelsTexts(IDictionary<string, string> labels)
+        {
+            _dialogLabelsTextsController.SetLabelsTexts(labels);
         }
 
         public void Open()

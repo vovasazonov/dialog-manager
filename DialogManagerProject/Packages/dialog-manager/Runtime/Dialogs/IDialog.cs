@@ -16,6 +16,7 @@ namespace Dialogs
         bool IsAllowCloseByOverlay { get; set; }
         void SetButtonsCallbacks(IDictionary<string, Action> callbacks);
         void SetButtonsLabels(IDictionary<string, string> labels);
+        void SetLabelsTexts(IDictionary<string, string> labels);
         void Open();
         void Close();
     }
