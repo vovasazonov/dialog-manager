@@ -16,11 +16,7 @@ namespace Dialogs
             _dialogControllerManager = new DialogControllerManager(_dialogs);
 
             InitializeDialogs(_dialogs, dialogDatabase);
-
-            foreach (var dialog in _dialogs.Values)
-            {
-                AddDialogListener(dialog);
-            }
+            AddDialogListeners();
         }
 
         private static void InitializeDialogs(IDictionary<string, IDialog> dialogs, IDialogDatabase dialogDatabase)
@@ -31,6 +27,22 @@ namespace Dialogs
                 dialog.IsAllowCloseByBack = dialogDescription.IsAllowCloseByBack;
                 dialog.IsAllowCloseByOverlay = dialogDescription.IsAllowCloseByOverlay;
                 dialog.DialogPriorityType = dialogDescription.DialogPriorityType;
+            }
+        }
+        
+        private void AddDialogListeners()
+        {
+            foreach (var dialog in _dialogs.Values)
+            {
+                AddDialogListener(dialog);
+            }
+        }
+        
+        private void RemoveDialogListeners()
+        {
+            foreach (var dialog in _dialogs.Values)
+            {
+                RemoveDialogListener(dialog);
             }
         }
 
