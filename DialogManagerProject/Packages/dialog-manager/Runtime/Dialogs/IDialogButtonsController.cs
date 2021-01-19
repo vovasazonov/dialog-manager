@@ -6,6 +6,6 @@ namespace Dialogs
     internal interface IDialogButtonsController
     {
         void SetButtonsCallbacks(IDictionary<string, Action> callbacks);
-        void SetButtonsLabels(IDictionary<string, string> callbacks);
+        void SetButtonsLabels(IDictionary<string, string> labels);
     }
 }

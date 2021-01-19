@@ -68,6 +68,11 @@ namespace Dialogs
             _dialogButtonsController.SetButtonsCallbacks(callbacks);
         }
 
+        public void SetButtonsLabels(IDictionary<string, string> labels)
+        {
+            _dialogButtonsController.SetButtonsLabels(labels);
+        }
+
         public void Open()
         {
             gameObject.SetActive(true);
