@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Dialogs
 {
@@ -10,9 +12,11 @@ namespace Dialogs
 
         [SerializeField] private string _id;
         [SerializeField] private ClickablePanel _overlay;
-
+        [SerializeField] private List<UnityDialogButton> _buttons;
+        
         private RectTransform _rectTransform;
         private bool _isAllowCloseByOverlay;
+        private IDialogButtonsController _dialogButtonsController;
 
         public string Id => _id;
         public bool IsAllowCloseByBack { get; set; }
@@ -41,6 +45,7 @@ namespace Dialogs
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
+            _dialogButtonsController = new DialogButtonsController(_buttons);
         }
 
         private void AddOverlayListener()
@@ -56,6 +61,11 @@ namespace Dialogs
         private void OnOverlayClick()
         {
             Close();
+        }
+
+        public void SetButtonsCallbacks(IDictionary<string, Action> callbacks)
+        {
+            _dialogButtonsController.SetButtonsCallbacks(callbacks);
         }
 
         public void Open()

@@ -1,4 +1,7 @@
-﻿namespace Dialogs
+﻿using System;
+using System.Collections.Generic;
+
+namespace Dialogs
 {
     internal delegate void RequestOpenHandler(IDialog dialog);
     internal delegate void RequestCloseHandler(IDialog dialog);
@@ -13,6 +16,11 @@
         public DialogController(IDialog dialog)
         {
             _dialog = dialog;
+        }
+
+        public void SetButtonsCallbacks(IDictionary<string, Action> callbacks)
+        {
+            _dialog.SetButtonsCallbacks(callbacks);
         }
 
         public void Open()

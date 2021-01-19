@@ -1,4 +1,7 @@
-﻿namespace Dialogs
+﻿using System;
+using System.Collections.Generic;
+
+namespace Dialogs
 {
     public delegate void OpenedHandler(IDialog dialog);
     public delegate void ClosedHandler(IDialog dialog);
@@ -11,7 +14,7 @@
         string Id { get; }
         bool IsAllowCloseByBack { get; set; }
         bool IsAllowCloseByOverlay { get; set; }
-        
+        void SetButtonsCallbacks(IDictionary<string, Action> callbacks);
         void Open();
         void Close();
     }

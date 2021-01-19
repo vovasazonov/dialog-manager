@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace Dialogs
 {
-    public interface IDialogController
+    internal interface IDialogButtonsController
     {
         void SetButtonsCallbacks(IDictionary<string, Action> callbacks);
-        void Open();
-        void Close();
     }
 }
