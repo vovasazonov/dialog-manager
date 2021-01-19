@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Dialogs.Descriptions;
 
 namespace Dialogs
@@ -9,13 +10,13 @@ namespace Dialogs
         private readonly List<IDialog> _openDialogs = new List<IDialog>();
         private readonly IDialogControllerManager _dialogControllerManager;
 
-        public DialogManager(IDictionary<string, IDialog> dialogs, IDialogDatabase dialogDatabase)
+        public DialogManager(IEnumerable<IDialog> dialogs, IDialogDatabase dialogDatabase)
         {
-            _dialogs = dialogs;
-            _dialogControllerManager = new DialogControllerManager(dialogs);
+            _dialogs = dialogs.ToDictionary(k => k.Id, v => v);
+            _dialogControllerManager = new DialogControllerManager(_dialogs);
 
-            InitializeDialogs(dialogs, dialogDatabase);
-            
+            InitializeDialogs(_dialogs, dialogDatabase);
+
             foreach (var dialog in _dialogs.Values)
             {
                 AddDialogListener(dialog);
@@ -38,7 +39,7 @@ namespace Dialogs
             dialog.Opened += OnOpened;
             dialog.Closed += OnClosed;
         }
-        
+
         private void RemoveDialogListener(IDialog dialog)
         {
             dialog.Opened -= OnOpened;
@@ -65,7 +66,7 @@ namespace Dialogs
             if (_openDialogs.Count > 0)
             {
                 var lastDialog = _openDialogs[_openDialogs.Count - 1];
-                
+
                 if (lastDialog.IsAllowCloseByBack)
                 {
                     lastDialog.Close();

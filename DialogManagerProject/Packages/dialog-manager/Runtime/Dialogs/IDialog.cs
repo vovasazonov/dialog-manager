@@ -8,6 +8,7 @@
         event OpenedHandler Opened;
         event ClosedHandler Closed;
 
+        string Id { get; }
         bool IsAllowCloseByBack { get; set; }
         bool IsAllowCloseByOverlay { get; set; }
         DialogPriorityType DialogPriorityType { get; set; }

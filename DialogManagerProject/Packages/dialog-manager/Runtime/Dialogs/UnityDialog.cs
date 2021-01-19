@@ -7,12 +7,14 @@ namespace Dialogs
     {
         public event OpenedHandler Opened;
         public event ClosedHandler Closed;
-        
+
+        [SerializeField] private string _id;
         [SerializeField] private ClickablePanel _overlay;
 
         private RectTransform _rectTransform;
         private bool _isAllowCloseByOverlay;
-        
+
+        public string Id => _id;
         public bool IsAllowCloseByBack { get; set; }
 
         public bool IsAllowCloseByOverlay

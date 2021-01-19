@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Dialogs;
+using Dialogs.Descriptions;
 using UnityEngine;
 
 public sealed class GameManager : MonoBehaviour
 {
-    [SerializeField] private UnityDialog OkCancelDialog;
-    [SerializeField] private UnityDialog OkDialog;
+    [SerializeField] private DialogDatabase _dialogDatabase;
+    [SerializeField] private List<UnityDialog> _dialogs;
     private DialogManager _dialogManager;
 
     private void Awake()
     {
-        var dialogDic = new Dictionary<string, IDialog> {{"okCancel", OkCancelDialog}, {"ok", OkDialog}};
-        _dialogManager = new DialogManager(dialogDic);
+        _dialogManager = new DialogManager(_dialogs, _dialogDatabase);
     }
 
     private void Update()
@@ -23,16 +22,12 @@ public sealed class GameManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            var dialog = _dialogManager.GetDialog("okCancel");
-            dialog.IsCloseByClickBack = true;
-            dialog.IsCloseByClickOverlay = true;
+            var dialog = _dialogManager.GetDialog("OkCancel");
             dialog.Open();
         }
         else if (Input.GetKeyDown(KeyCode.O))
         {
-            var dialog = _dialogManager.GetDialog("ok");
-            dialog.IsCloseByClickBack = true;
-            dialog.IsCloseByClickOverlay = true;
+            var dialog = _dialogManager.GetDialog("Ok");
             dialog.Open();
         }
     }
