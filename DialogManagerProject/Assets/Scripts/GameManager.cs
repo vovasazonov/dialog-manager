@@ -17,18 +17,18 @@ public sealed class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             _dialogManager.CloseLastDialogByBack();
         }
-        else if (Input.GetKey(KeyCode.C))
+        else if (Input.GetKeyDown(KeyCode.C))
         {
             var dialog = _dialogManager.GetDialog("okCancel");
             dialog.IsCloseByClickBack = true;
             dialog.IsCloseByClickOverlay = true;
             dialog.Open();
         }
-        else if (Input.GetKey(KeyCode.O))
+        else if (Input.GetKeyDown(KeyCode.O))
         {
             var dialog = _dialogManager.GetDialog("ok");
             dialog.IsCloseByClickBack = true;

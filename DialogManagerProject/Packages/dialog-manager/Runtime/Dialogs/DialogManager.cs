@@ -6,42 +6,44 @@ namespace Dialogs
     {
         private readonly IDictionary<string, IDialog> _dialogs;
         private readonly List<IDialog> _openDialogs = new List<IDialog>();
+        private readonly IDialogControllerManager _dialogControllerManager;
 
         public DialogManager(IDictionary<string, IDialog> dialogs)
         {
             _dialogs = dialogs;
-        }
-        
-        public IDialogController GetDialog(string id)
-        {
-            var dialog = _dialogs[id];
-            var dialogController = new DialogController(dialog);
-            AddDialogListener(dialog);
-                
-            return dialogController;
+            _dialogControllerManager = new DialogControllerManager(dialogs);
+            
+            foreach (var dialog in _dialogs.Values)
+            {
+                AddDialogListener(dialog);
+            }
         }
 
         private void AddDialogListener(IDialog dialog)
         {
-            dialog.Closed += OnDialogClosed;
-            dialog.Opened += OnDialogOpened;
+            dialog.Opened += OnOpened;
+            dialog.Closed += OnClosed;
         }
-
+        
         private void RemoveDialogListener(IDialog dialog)
         {
-            dialog.Closed -= OnDialogClosed;
-            dialog.Opened -= OnDialogOpened;
+            dialog.Opened -= OnOpened;
+            dialog.Closed -= OnClosed;
         }
 
-        private void OnDialogOpened(IDialog dialog)
+        private void OnClosed(IDialog dialog)
+        {
+            _openDialogs.Remove(dialog);
+        }
+
+        private void OnOpened(IDialog dialog)
         {
             _openDialogs.Add(dialog);
         }
 
-        private void OnDialogClosed(IDialog dialog)
+        public IDialogController GetDialog(string id)
         {
-            _openDialogs.Remove(dialog);
-            RemoveDialogListener(dialog);
+            return _dialogControllerManager.GetDialog(id);
         }
 
         public void CloseLastDialogByBack()
