@@ -38,7 +38,7 @@ namespace Dialogs
         {
             if (dialog.AllowQueue)
             {
-                _queueDialogsController.Open(dialog);
+                _queueDialogsController.Handle(dialog);
             }
             else
             {

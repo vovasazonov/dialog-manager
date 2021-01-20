@@ -2,6 +2,6 @@
 {
     public interface IQueueDialogsController
     {
-        void Open(IDialog dialog);
+        void Handle(IDialog dialog);
     }
 }

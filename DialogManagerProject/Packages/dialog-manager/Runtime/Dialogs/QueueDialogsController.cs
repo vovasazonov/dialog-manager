@@ -39,7 +39,7 @@ namespace Dialogs
             return isQueue;
         }
 
-        public void Open(IDialog dialog)
+        public void Handle(IDialog dialog)
         {
             if (!IsQueue(dialog.DialogPriorityType))
             {
