@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Dialogs
 {
@@ -13,8 +14,8 @@ namespace Dialogs
         [SerializeField] private string _id;
         [SerializeField] private ClickablePanel _overlay;
         [SerializeField] private List<UnityButton> _buttons;
-        [SerializeField] private List<UnityDialogText> _labelTexts;
-        
+        [SerializeField] private List<DialogText> _dialogTexts;
+
         private RectTransform _rectTransform;
         private bool _isAllowCloseByOverlay;
         private IButtonsController _buttonsController;
@@ -48,7 +49,7 @@ namespace Dialogs
         {
             _rectTransform = GetComponent<RectTransform>();
             _buttonsController = new ButtonsController(_buttons);
-            _dialogTextsController = new DialogTextsController(_labelTexts);
+            _dialogTextsController = new DialogTextsController(_dialogTexts);
         }
 
         private void AddOverlayListener()
@@ -71,14 +72,14 @@ namespace Dialogs
             _buttonsController.SetButtonsCallbacks(callbacks);
         }
 
-        public void SetButtonsTexts(IDictionary<string, string> labels)
+        public void SetButtonsTexts(IDictionary<string, string> texts)
         {
-            _buttonsController.SetButtonsTexts(labels);
+            _buttonsController.SetButtonsTexts(texts);
         }
 
-        public void SetDialogTexts(IDictionary<string, string> labels)
+        public void SetDialogTexts(IDictionary<string, string> texts)
         {
-            _dialogTextsController.SetDialogTexts(labels);
+            _dialogTextsController.SetDialogTexts(texts);
         }
 
         public void Open()
@@ -102,6 +103,19 @@ namespace Dialogs
         private void CallClosed(IDialog dialog)
         {
             Closed?.Invoke(dialog);
+        }
+
+        [Serializable]
+        private class DialogText : IDialogText
+        {
+            [SerializeField] private string _id;
+            [SerializeField] private Text _text;
+            
+            public string Id => _id;
+            public void SetText(string text)
+            {
+                _text.text = text;
+            }
         }
     }
 }

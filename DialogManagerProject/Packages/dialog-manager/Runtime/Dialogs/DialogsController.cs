@@ -2,11 +2,11 @@
 
 namespace Dialogs
 {
-    internal class DialogControllers : IDialogControllers
+    internal class DialogsController : IDialogsController
     {
         private readonly IDictionary<string, IDialog> _dialogs;
 
-        public DialogControllers(IDictionary<string, IDialog> dialogs)
+        public DialogsController(IDictionary<string, IDialog> dialogs)
         {
             _dialogs = dialogs;
         }

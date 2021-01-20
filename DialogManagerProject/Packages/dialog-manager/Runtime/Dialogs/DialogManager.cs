@@ -8,12 +8,12 @@ namespace Dialogs
     {
         private readonly IDictionary<string, IDialog> _dialogs;
         private readonly List<IDialog> _openDialogs = new List<IDialog>();
-        private readonly IDialogControllers _dialogControllers;
+        private readonly IDialogsController _dialogsController;
 
         public DialogManager(IEnumerable<IDialog> dialogs, IDialogDatabase dialogDatabase)
         {
             _dialogs = dialogs.ToDictionary(k => k.Id, v => v);
-            _dialogControllers = new DialogControllers(_dialogs);
+            _dialogsController = new DialogsController(_dialogs);
 
             InitializeDialogs(_dialogs, dialogDatabase);
             AddDialogListeners();
@@ -69,7 +69,7 @@ namespace Dialogs
 
         public IDialogController GetDialog(string id)
         {
-            return _dialogControllers.GetDialog(id);
+            return _dialogsController.GetDialog(id);
         }
 
         public void CloseLastDialogByBack()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace Dialogs
 {
     internal delegate void RequestOpenHandler(IDialog dialog);
+
     internal delegate void RequestCloseHandler(IDialog dialog);
 
     internal class DialogController : IDialogController
@@ -26,6 +27,11 @@ namespace Dialogs
         public void SetButtonsTexts(IDictionary<string, string> texts)
         {
             _dialog.SetButtonsTexts(texts);
+        }
+
+        public void SetDialogTexts(IDictionary<string, string> texts)
+        {
+            _dialog.SetDialogTexts(texts);
         }
 
         public void Open()

@@ -2,7 +2,7 @@
 
 namespace Dialogs
 {
-    public class DialogTextsController : IDialogTextsController
+    internal class DialogTextsController : IDialogTextsController
     {
         private readonly IDictionary<string, IDialogText> _texts = new Dictionary<string, IDialogText>();
 

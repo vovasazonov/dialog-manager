@@ -1,6 +1,6 @@
 ﻿namespace Dialogs
 {
-    internal interface IDialogControllers
+    internal interface IDialogsController
     {
         IDialogController GetDialog(string id);
     }
