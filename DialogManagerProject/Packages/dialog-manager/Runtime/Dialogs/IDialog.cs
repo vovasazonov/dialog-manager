@@ -14,6 +14,8 @@ namespace Dialogs
         string Id { get; }
         bool IsAllowCloseByBack { get; set; }
         bool IsAllowCloseByOverlay { get; set; }
+        bool AllowQueue { get; set; }
+        DialogPriorityType DialogPriorityType { get; set; }
         void SetButtonsCallbacks(IDictionary<string, Action> callbacks);
         void SetButtonsTexts(IDictionary<string, string> texts);
         void SetDialogTexts(IDictionary<string, string> texts);

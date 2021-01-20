@@ -5,10 +5,12 @@ namespace Dialogs
     internal class DialogsController : IDialogsController
     {
         private readonly IDictionary<string, IDialog> _dialogs;
+        private readonly IQueueDialogsController _queueDialogsController;
 
         public DialogsController(IDictionary<string, IDialog> dialogs)
         {
             _dialogs = dialogs;
+            _queueDialogsController = new QueueDialogsController();
         }
 
         public IDialogController GetDialog(string id)
@@ -34,7 +36,14 @@ namespace Dialogs
 
         private void OnRequestOpen(IDialog dialog)
         {
-            dialog.Open();
+            if (dialog.AllowQueue)
+            {
+                _queueDialogsController.Open(dialog);
+            }
+            else
+            {
+                dialog.Open();
+            }
         }
 
         private void OnRequestClose(IDialog dialog)

@@ -26,6 +26,8 @@ namespace Dialogs
                 var dialog = dialogs[dialogDescription.Id];
                 dialog.IsAllowCloseByBack = dialogDescription.IsAllowCloseByBack;
                 dialog.IsAllowCloseByOverlay = dialogDescription.IsAllowCloseByOverlay;
+                dialog.AllowQueue = dialogDescription.AllowQueue;
+                dialog.DialogPriorityType = dialogDescription.DialogPriorityType;
             }
         }
         

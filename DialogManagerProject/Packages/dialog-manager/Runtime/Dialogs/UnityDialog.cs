@@ -45,6 +45,9 @@ namespace Dialogs
             }
         }
 
+        public bool AllowQueue { get; set; }
+        public DialogPriorityType DialogPriorityType { get; set; }
+
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
