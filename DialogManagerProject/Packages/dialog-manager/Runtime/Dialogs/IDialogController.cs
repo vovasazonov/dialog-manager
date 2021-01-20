@@ -7,6 +7,7 @@ namespace Dialogs
     {
         void SetButtonsCallbacks(IDictionary<string, Action> callbacks);
         void SetButtonsTexts(IDictionary<string, string> texts);
+        void SetDialogTexts(IDictionary<string, string> texts);
         void Open();
         void Close();
     }
