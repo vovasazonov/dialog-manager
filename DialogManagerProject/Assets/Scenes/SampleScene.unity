@@ -1022,6 +1022,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1201515847}
     m_Modifications:
+    - target: {fileID: 9186489168042389550, guid: b6f10a89a95323e4e8f7ea438d61c6fa, type: 3}
+      propertyPath: _dialogTexts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9186489168042389551, guid: b6f10a89a95323e4e8f7ea438d61c6fa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
